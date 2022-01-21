@@ -1,0 +1,161 @@
+<html style="background-color:rgb(20,20,20)">
+<head>
+<link rel="stylesheet" type="text/css" href="Css Files\navBar.css">
+<link rel="stylesheet" type="text/css" href="Css Files\form.css">
+
+
+
+
+<title> Find Animal </title>
+
+</head>
+<body>
+
+    <div id="navbar">
+
+        <a id="navlink"  href = "HomePage.html" target="_self"  > <b> Home </b> </a>	
+        <a id="navlink"  href = "dropHome.html" target="_self"  > <b> Drop an Animal </b> </a>
+        <a id="navlink"  href = "#"> <b> Adopt an Animal </b></a>
+        <a id="navlink"  href = "ReportIncident.html" target="_self"> <b> Report an Incident </b> </a>
+        <a id="navlink"  href = "FindAnimal.html" target="_self" style = "background-color:#3d98ff"> <b> Find an Animal </b></a>
+        <a id="navlink"  href = "donateFund.html"  target="_self"> <b> Donate Funds </b> </a>
+        <a id="navlink"  href = "#" style="float:right"> <b> Contact Us </b> </a>
+        </div>
+
+
+           
+    <div class="main-block">
+    <form class="forms" action="/"> 
+        <br>
+        <h1 style="margin-left: 60px;" >Animal Identifications</h1>
+        <br>
+          <h1 ></h1>
+
+            <div id="formdiv">
+            <label> Select type </label>  
+                <select id="atype">
+                <option value ="Cat">Cat</option>
+                <option value ="Dog">Dog</option>
+                <option value ="Rabbit">Rabbit</option>
+                <option value ="Donkey">Donkey</option>
+                <option value ="Horse">Horse</option>
+                </select> 
+            </div>
+            
+            <div id="formdiv">
+                <label> Nickname(if any) </label>
+                <input type="text" id="anickname" placeholder="Nickname">
+            </div>
+
+            <div id="formdiv">
+                <label> Select gender </label>  
+                <select id="agender">
+                <option value ="Male">Male</option>
+                <option value ="Female">Female</option>
+                </select> 
+            </div>
+
+            <div id="formdiv" onclick="reset1()">
+                <label> Age </label>
+                <input type="text" id="aage" placeholder="Age"> 
+            </div>
+
+
+            <div id="formdiv" onclick = "reset2()">
+                <label> Lost since </label>
+                <input type="date" id="ld" placeholder="since when animal was missing?">
+            </div>
+
+            <div id="formdiv">
+                <label> Color </label>
+                <!-- ADD colors from database in form of a list -->
+            </div>
+            
+            <div id="formdiv">
+                <label> Breed </label>
+                <!-- ADD breeds from database in form of a list -->
+            </div>
+            
+
+      <button type="button" onclick="getFormData()"> Find </button>
+
+    </form>
+    </div>
+
+
+</body>
+
+
+</html>
+
+
+<script>
+  function getFormData() 
+  {
+      var errors = 0; 
+     
+    var age = validnumber(document.getElementById("aage").value,1,150);
+    if (age == -1) {
+        document.getElementById("aage").style.border="1px solid red";
+        document.getElementById("aage").style.color="red";
+        errors += 1;
+    }
+    else 
+    {
+      //get age value
+    }
+
+
+    var dateString = document.getElementById("ld").value;
+    var parts = dateString.split("-");
+    
+    if (dateString == "" || parts[0] > 2019) {
+        document.getElementById("ld").style.border="1px solid red";
+        document.getElementById("ld").style.color="red";
+        errors += 1;
+    }
+    else
+    {
+      //get age value
+    }
+
+
+    if (errors == 0)
+    {
+        window.alert("Animal Admitted Successfully!" );
+        document.getElementById("aage").value = "";
+        document.getElementById("ld").value = "";
+        document.getElementById("anickname").value = "";
+    }
+    
+  }
+
+
+
+
+  function reset1()
+  {
+        document.getElementById("aage").style.border="1px solid #1c87c9";
+        document.getElementById("aage").style.color=null;
+        document.getElementById("aage").value = "";
+  }
+
+  function reset2()
+  {
+        document.getElementById("ld").style.border="1px solid #1c87c9";
+        document.getElementById("ld").style.color=null;
+  }
+  
+
+  function validnumber(x,min,max)
+  {
+    if (isNaN(x) || x < min || x > max) {
+      return -1;
+    } else {
+      return x;
+    }
+  }
+
+
+
+  </script>

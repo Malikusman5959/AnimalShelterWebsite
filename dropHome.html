@@ -1,0 +1,424 @@
+<html style="background-color:rgb(20,20,20)">
+<head>
+<link rel="stylesheet" type="text/css" href="Css Files\navBar.css">
+<link rel="stylesheet" type="text/css" href="Css Files\form.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
+
+
+
+    
+<title> Drop Animal </title>
+
+<style>
+
+
+</style>
+
+
+</head>
+<body>
+
+    <div id="navbar">
+
+        <a id="navlink"  href = "HomePage.html" target="_self"  > <b> Home </b> </a>	
+        <a id="navlink"  href = "dropHome.html" target="_self"  style = "background-color:#3d98ff"> <b> Drop an Animal </b> </a>
+        <a id="navlink"  href = "#"> <b> Adopt an Animal </b></a>
+        <a id="navlink"  href = "ReportIncident.html" target="_self"> <b> Report an Incident </b> </a>
+        <a id="navlink"  href = "FindAnimal.html" target="_self"> <b> Find an Animal </b></a>
+        <a id="navlink"  href = "donateFund.html"  target="_self"> <b> Donate Funds </b> </a>
+        <a id="navlink"  href = "#" style="float:right"> <b> Contact Us </b> </a>
+        </div>
+
+
+           
+    <div class="main-block">
+    <form action="/"> 
+      
+      
+      
+      <div class="forms" style="float: left" >
+          <br>
+          <h1 >Animal Information</h1>
+
+            <div id="formdiv">
+            <label> Select type </label>  
+                <select id="atype">
+                <option value ="Cat">Cat</option>
+                <option value ="Dog">Dog</option>
+                <option value ="Rabbit">Rabbit</option>
+                <option value ="Donkey">Donkey</option>
+                <option value ="Horse">Horse</option>
+                </select> 
+            </div>
+            
+            <div id="formdiv">
+                <label> Nickname(if any) </label>
+                <input type="text" id="anickname" placeholder="Nickname">
+            </div>
+            
+            
+            <div id="formdiv" onclick="reset1()">
+                <label> Age </label>
+                <input type="text" id="aage" placeholder="Age"> 
+            </div>
+
+            <div id="formdiv">
+                <label> Select gender </label>  
+                <select id="agender">
+                <option value ="Male">Male</option>
+                <option value ="Female">Female</option>
+                </select> 
+            </div>
+
+            <div id="formdiv">
+                <label> Color </label>
+                <!-- ADD colors from database in form of a list -->
+            </div>
+            
+            <div id="formdiv">
+                <label> Breed </label>
+                <!-- ADD breeds from database in form of a list -->
+            </div>
+
+            <div id="formdiv" onclick="reset2()">
+                <label> Height </label>
+                <input type="text" id="aheight" placeholder="cm">
+            </div>
+
+            <div id="formdiv" onclick="reset3()">
+                <label> Weight </label>
+                <input type="text" id="aweight" placeholder="kg">
+            </div>
+
+            <div id="formdiv">
+                    <label> disease (if any) </label>  
+                    <!-- ADD diseases from database in form of a list -->
+                    <select id="agender">
+                    <option value ="Male">Male</option>
+                    <option value ="Female">Female</option>
+                    </select>  
+            </div>
+
+            <div id="formdiv">
+                <label> Upload a Photo </label>
+                <input style="border: 0ch" type="file" id="aphoto">
+            </div>
+            
+        
+      </div>
+
+
+
+      <div class="forms" style="float: right ">
+        <br>
+        <h1 >Dropper Information</h1>
+        
+        <div id="formdiv" onclick = "reset4()">
+            <label> First Name </label>
+            <input type="text" id="fn" placeholder="first name">
+        </div>
+
+        <div id="formdiv" onclick = "reset5()">
+            <label> Last Name </label>
+            <input type="text" id="ln" placeholder="last name">
+        </div>
+
+        <div id="formdiv" onclick = "reset6()">
+            <label> Date of Birth </label>
+            <input type="date" id="dob" placeholder="date of birth">
+        </div>
+
+        <div id="formdiv">
+            <label> Select gender </label>  
+            <select id="gender">
+            <option value ="Male">Male</option>
+            <option value ="Female">Female</option>
+            </select> 
+        </div>
+
+        <div id="formdiv" onclick = "reset7()">
+            <label> CNIC </label>
+            <input type="text"  data-inputmask="'mask': '99999-9999999-9'"  placeholder="XXXXX-XXXXXXX-X"  id="cnic" required="" >
+        </div>
+
+        <div id="formdiv" onclick = "reset8()">
+            <label> email </label>
+            <input type="email" id="em" placeholder="e.g mr123@gmail.com">
+        </div>
+
+        <div id="formdiv" onclick = "reset9()">
+            <label> address </label>
+            <input type="text" id="adres" placeholder="address">
+        </div>
+
+        <div id="formdiv">
+            <label> City </label>
+            <!-- ADD city from database in form of a list -->
+        </div>
+
+        <div id="formdiv" onclick = "reset10()">
+            <label> Mobile No </label>
+            <input type="text"  data-inputmask="'mask': '0399-99999999'" id="mn" required=""  type = "number" maxlength = "12" >
+        </div>
+        
+      </div>
+      <br><br><br>
+
+      <button type="button" onclick="getFormData()"> Submit </button>
+
+    </form>
+    </div>
+
+
+</body>
+
+
+</html>
+
+
+<script>
+  function getFormData() 
+  {
+      var errors = 0; 
+     
+    var age = validnumber(document.getElementById("aage").value,1,150);
+    if (age == -1) {
+        document.getElementById("aage").style.border="1px solid red";
+        document.getElementById("aage").style.color="red";
+        errors += 1;
+    }
+    else 
+    {
+      //get age value
+    }
+
+    
+    var height = validnumber(document.getElementById("aheight").value,50,170);
+    if (height == -1) {
+        document.getElementById("aheight").style.border="1px solid red";
+        document.getElementById("aheight").style.color="red";
+        errors += 1;
+    }
+    else 
+    {
+      //get age value
+    }
+
+
+     var weight = validnumber(document.getElementById("aweight").value,1,250);
+    if (weight == -1) {
+        document.getElementById("aweight").style.border="1px solid red";
+        document.getElementById("aweight").style.color="red";
+        errors += 1;
+    }
+    else 
+    {
+      //get age value
+    }
+
+
+    var fn = document.getElementById("fn").value;
+    if (fn == "") {
+        document.getElementById("fn").style.border="1px solid red";
+        document.getElementById("fn").style.color="red";
+        errors += 1;
+    }
+    else 
+    {
+      //get age value
+    }
+
+    var ln = document.getElementById("ln").value;
+    if (ln == "") {
+        document.getElementById("ln").style.border="1px solid red";
+        document.getElementById("ln").style.color="red";
+        errors += 1;
+    }
+    else 
+    {
+      //get age value
+    }
+
+    var dateString = document.getElementById("dob").value;
+    var parts = dateString.split("-");
+    
+    if (dateString == "" || parts[0] > 2018) {
+        document.getElementById("dob").style.border="1px solid red";
+        document.getElementById("dob").style.color="red";
+        errors += 1;
+    }
+    else
+    {
+      //get age value
+    }
+
+
+    var cnc = document.getElementById("cnic").value;
+    if (cnc.length < 15) {
+        document.getElementById("cnic").style.border="1px solid red";
+        document.getElementById("cnic").style.color="red";
+        errors += 1;
+    }
+    else 
+    {
+      //get age value
+    }
+
+    var mn = document.getElementById("mn").value;
+    if (mn.length < 12) {
+        document.getElementById("mn").style.border="1px solid red";
+        document.getElementById("mn").style.color="red";
+        errors += 1;
+    }
+    else 
+    {
+      //get age value
+    }
+
+    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if(document.getElementById("em").value.match(mailformat))
+    {
+      //valid
+    }
+    else
+    {
+        document.getElementById("em").style.border="1px solid red";
+        document.getElementById("em").style.color="red";
+        errors += 1;
+    }
+    
+    var adr = document.getElementById("adres").value;
+    if (adr.length < 5) {
+        document.getElementById("adres").style.border="1px solid red";
+        document.getElementById("adres").style.color="red";
+        errors += 1;
+    }
+    else 
+    {
+      //get age value
+    }
+
+
+
+
+    if (errors == 0)
+    {
+        window.alert("Animal Admitted Successfully!" );
+        document.getElementById("aage").value = "";
+        document.getElementById("aheight").value = "";
+        document.getElementById("aweight").value = "";
+        document.getElementById("fn").value = "";
+        document.getElementById("ln").value = "";
+        document.getElementById("dob").value = "";
+        document.getElementById("cnic").value = "";
+        document.getElementById("em").value = "";
+        document.getElementById("adres").value = "";
+        document.getElementById("mn").value = "";
+        document.getElementById("anickname").value = "";
+    }
+    
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  function reset1()
+  {
+        document.getElementById("aage").style.border="1px solid #1c87c9";
+        document.getElementById("aage").style.color=null;
+        document.getElementById("aage").value = "";
+  }
+
+  function reset2()
+  {
+        document.getElementById("aheight").style.border="1px solid #1c87c9";
+        document.getElementById("aheight").style.color=null;
+        document.getElementById("aheight").value = "";
+  }
+  function reset3()
+  {
+        document.getElementById("aweight").style.border="1px solid #1c87c9";
+        document.getElementById("aweight").style.color=null;
+        document.getElementById("aweight").value = "";
+  }
+
+  function reset4()
+  {
+        document.getElementById("fn").style.border="1px solid #1c87c9";
+        document.getElementById("fn").style.color=null;
+        document.getElementById("fn").value = "";
+  }
+
+  function reset5()
+  {
+        document.getElementById("ln").style.border="1px solid #1c87c9";
+        document.getElementById("ln").style.color=null;
+        document.getElementById("ln").value = "";
+  }
+
+  function reset6()
+  {
+        document.getElementById("dob").style.border="1px solid #1c87c9";
+        document.getElementById("dob").style.color=null;
+        document.getElementById("dob").value = "";
+  }
+
+  function reset7()
+  {
+        document.getElementById("cnic").style.border="1px solid #1c87c9";
+        document.getElementById("cnic").style.color=null;
+        document.getElementById("cnic").value = "";
+  }
+
+  function reset8()
+  {
+        document.getElementById("em").style.border="1px solid #1c87c9";
+        document.getElementById("em").style.color=null;
+        document.getElementById("em").value = "";
+  }
+
+  function reset9()
+  {
+        document.getElementById("adres").style.border="1px solid #1c87c9";
+        document.getElementById("adres").style.color=null;
+        document.getElementById("adres").value = "";
+  }
+
+  function reset10()
+  {
+        document.getElementById("mn").style.border="1px solid #1c87c9";
+        document.getElementById("mn").style.color=null;
+        document.getElementById("mn").value = "";
+  }
+
+  function validnumber(x,min,max)
+  {
+    if (isNaN(x) || x < min || x > max) {
+      return -1;
+    } else {
+      return x;
+    }
+  }
+
+
+
+  </script>
+
+<script>
+    $(":input").inputmask();
+
+</script>

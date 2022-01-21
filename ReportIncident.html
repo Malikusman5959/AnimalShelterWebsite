@@ -1,0 +1,173 @@
+<html style="background-color:rgb(20,20,20)">
+<head>
+<link rel="stylesheet" type="text/css" href="Css Files\navBar.css">
+<link rel="stylesheet" type="text/css" href="Css Files\form.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
+
+
+<title> Report Incident </title>
+
+<style>
+
+
+</style>
+
+
+</head>
+<body>
+
+    <div id="navbar">
+
+        <a id="navlink"  href = "HomePage.html" target="_self"  > <b> Home </b> </a>	
+        <a id="navlink"  href = "dropHome.html" target="_self" > <b> Drop an Animal </b> </a>
+        <a id="navlink"  href = "#"> <b> Adopt an Animal </b></a>
+        <a id="navlink"  href = "ReportIncident.html" target="_self"  style = "background-color:#3d98ff"> <b> Report an Incident </b> </a>
+        <a id="navlink"  href = "FindAnimal.html" target="_self"> <b> Find an Animal </b></a>
+        <a id="navlink"  href = "donateFund.html"  target="_self"> <b> Donate Funds </b> </a>
+        <a id="navlink"  href = "#" style="float:right"> <b> Contact Us </b> </a>
+        </div>
+
+
+           
+    <div class="main-block">
+    <form class = "forms" style=" width: 600px; height: 350px;" action="/"> 
+      
+      
+      
+          <br>
+          <h1 style="margin-left: 200px;" >Incident Details</h1>
+
+            <div id="formdiv">
+            <label> Incident type </label>  
+                <select id="itype">
+                <option value ="Stray Animal">Stray Animal</option>
+                <option value ="Animal Torture">Animal Torture</option>
+                <option value ="Injured Animal">Injured Animal</option>
+                <option value ="Animal Abuse">Animal Abuse</option>
+                </select> 
+            </div>
+            
+            <div id="formdiv" onclick="reset1()">
+                <label> Location </label>
+                <input type="text" id="iloc" placeholder="address">
+            </div>
+
+            
+            <div id="formdiv" onclick="reset2()">
+                <label> Time </label>
+                <input type="time" id="itime" >
+            </div>
+
+            <div id="formdiv" onclick="reset3()">
+                <label> Reporter Contact </label>
+                <input type="text"  data-inputmask="'mask': '0399-99999999'" id="mn" required=""  type = "number" maxlength = "12" >
+            </div>
+
+
+      <button type="button" onclick="getFormData()"> Report </button>
+      
+      
+
+    </form>
+    </div>
+
+  
+
+
+
+</body>
+
+
+</html>
+
+
+
+<script>
+
+    function getFormData() 
+    {
+        var errors = 0; 
+        
+      var mn = document.getElementById("mn").value;
+      if (mn.length < 12) {
+          document.getElementById("mn").style.border="1px solid red";
+          document.getElementById("mn").style.color="red";
+          errors += 1;
+      }
+      else 
+      {
+        //get age value
+      }
+  
+      
+      var adr = document.getElementById("iloc").value;
+      if (adr.length < 5) {
+          document.getElementById("iloc").style.border="1px solid red";
+          document.getElementById("iloc").style.color="red";
+          errors += 1;
+      }
+      else 
+      {
+        //get age value
+      }
+  
+
+      var time = document.getElementById("itime").value;
+        if (time.length != 5 )
+        {
+            document.getElementById("itime").style.border="1px solid red";
+            document.getElementById("itime").style.color="red";
+            errors += 1;
+        }
+        else 
+        {
+        //get age value
+        }
+        
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); 
+        var yyyy = today.getFullYear();
+
+        today = yyyy + '-' + mm + '-' + dd;
+
+        //get age value
+  
+
+        if (errors == 0)
+        {
+            window.alert("Form Submitted Successfully!");
+        }
+      
+    }
+  
+  
+    function reset1()
+    {
+          document.getElementById("iloc").style.border="1px solid #1c87c9";
+          document.getElementById("iloc").style.color=null;
+          document.getElementById("iloc").value = "";
+    }
+  
+    function reset2()
+    {
+          document.getElementById("itime").style.border="1px solid #1c87c9";
+          document.getElementById("itime").style.color=null;
+
+    }
+  
+    function reset3()
+    {
+          document.getElementById("mn").style.border="1px solid #1c87c9";
+          document.getElementById("mn").style.color=null;
+          document.getElementById("mn").value = "";
+    }
+  
+    
+    </script>
+  
+  <script>
+      $(":input").inputmask();
+  
+  </script>
